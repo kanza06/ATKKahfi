@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { verifySession, COOKIE } from '@/lib/jwt';
 
-const PUBLIK = ['/login', '/api/auth/login', '/api/auth/logout'];
+const PUBLIK = ['/login', '/api/auth/login', '/api/auth/logout', '/api/setup-db'];
 
 export async function middleware(req) {
   const { pathname } = req.nextUrl;

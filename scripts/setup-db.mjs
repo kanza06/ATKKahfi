@@ -18,8 +18,9 @@ function loadEnv(file) {
 loadEnv(path.join(root, '.env.local'));
 loadEnv(path.join(root, '.env'));
 
-const url = new URL(process.env.DATABASE_URL || 'mysql://root:@127.0.0.1:3306/atk_kahfi');
-const dbName = url.pathname.replace(/^\//, '') || 'atk_kahfi';
+const DEFAULT_DB_URL = 'mysql://schema_situation:659d13e2358666f89c5a2d571a3af585dbb4b348@qqaizl.h.filess.io:61001/schema_situation';
+const url = new URL(process.env.DATABASE_URL || DEFAULT_DB_URL);
+const dbName = url.pathname.replace(/^\//, '') || 'schema_situation';
 const base = {
   host: url.hostname,
   port: Number(url.port || 3306),
@@ -27,7 +28,7 @@ const base = {
   password: decodeURIComponent(url.password),
   multipleStatements: true,
 };
-if (process.env.DB_SSL === 'true') base.ssl = { rejectUnauthorized: true };
+if (process.env.DB_SSL === 'true') base.ssl = { rejectUnauthorized: false };
 
 const conn = await mysql.createConnection(base);
 
